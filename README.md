@@ -9,7 +9,7 @@
 [自定义机器人接入](https://open.feishu.cn/document/client-docs/bot-v3/add-custom-bot#756b882f)
 
 * [X]  普通文本消息 `client.Text`
-* [ ]  Markdown消息 `client.Markdown`
+* [X]  富文本消息 `client.RichText`
 * [ ]  群名片消息 `client.ShareChat`
 * [ ]  图片消息 `client.Image`
 * [ ]  消息卡片 `client.Interactive`
@@ -54,3 +54,23 @@
   } else {
       fmt.Printf("%#v", sr)
   }
+  ```
+
+* 发送富文本消息
+ 
+  > 不支持at单个用户，只支持at所有人
+  > 富文本消息不是Markdown消息，在 RichTextContentWithText 中不支持Markdown。
+  > 
+
+  ```go
+  ret, err := client.RichText("飞书Webhook机器人富文本", [][]feishu.RichTextContent{
+      {feishu.RichTextContentWithText("测试消息1"), feishu.RichTextContentWithLink("跳转到百度", "https://www.baidu.com")},
+      {feishu.RichTextContentWithText("测试消息2"), feishu.RichTextContentWithLink("跳转到京东", "https://www.jd.com")},
+      {feishu.RichTextContentWithAtAll()},
+  })
+  if err != nil {
+      fmt.Println(err)
+  } else {
+      fmt.Printf("%#v", ret)
+  }
+  ```

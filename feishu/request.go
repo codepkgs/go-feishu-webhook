@@ -20,8 +20,6 @@ func (c *Client) do(bytes []byte) ([]byte, error) {
 
 	r.SetBody(bytes)
 
-	fmt.Println(string(bytes))
-
 	resp, err := r.Post(c.WebhookAddress)
 
 	if err != nil {
